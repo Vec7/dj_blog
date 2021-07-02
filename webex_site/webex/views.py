@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import *
 
 
-class WomenHome(ListView):
+class WebexHome(ListView):
     template_name = 'webex/index.html'
     context_object_name = 'posts'
 
@@ -21,4 +21,9 @@ class WomenHome(ListView):
     #     return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Women.objects.filter(is_published=True)
+        return Product.objects.filter(is_published=True)
+
+
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')

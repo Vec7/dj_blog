@@ -17,9 +17,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
+
 from coolsite import settings
-from women.views import *
 from django.urls import path, include
+
+from webex.views import pageNotFound
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -7,5 +7,5 @@ from .views import *
 
 
 urlpatterns = [
-    path('',  WomenHome.as_view(), name='home'),
+    path('',  WebexHome.as_view(), name='home'),
 ]

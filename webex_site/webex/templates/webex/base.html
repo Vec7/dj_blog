@@ -4,98 +4,65 @@
 <html>
 <head>
 	<title>{{title}}</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<link type="text/css" href="{% static 'women/css/styles.css' %}" rel="stylesheet" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="{% static 'women/images/main.ico' %}" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-<table class="table-page" border=0 cellpadding="0" cellspacing="0">
-<tr><td valign=top>
-{% block mainmenu %}
-		<div class="header">
-			<ul id="mainmenu" class="mainmenu">
-			<li class="logo"><a href="{% url 'home' %}"><div class="logo"></div></a></li>
-{% for m in menu %}
-			<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
-{% endfor %}
-				{% if request.user.is_authenticated %}
-				<li class="last"> {{user.username}} | <a href="{% url 'logout' %}">Выйти</a></li>
-				{% else %}
-				<li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
-				{% endif %}
-			</ul>
-			<div class="clear"></div>
-		</div>
-{% endblock mainmenu %}
+
+<div class="container-md">
 
 
-<table class="table-content" border=0 cellpadding="0" cellspacing="0">
-<tr>
-<!-- Sidebar слева -->
-	<td valign="top" class="left-chapters">
-	<ul id="leftchapters">
-{% if cat_selected == 0 %}
-		<li class="selected">Все категории</li>
-{% else %}
-		<li><a href="{% url 'home' %}">Все категории</a></li>
-{% endif %}
-
-{% for c in cats %}
-{% if c.women__count > 0 %}
-	{% if c.pk == cat_selected %}
-		<li class="selected">{{c.name}}</li>
-	{% else %}
-		<li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
-	{% endif %}
-{% endif %}
-{% endfor %}
-
-	</ul>
-</td>
-<!-- Конец Sidebar'а -->
-<td valign="top" class="content">
-	<!-- Хлебные крошки -->
-	{% block breadcrumbs %}
-	{% endblock %}
-
-<!-- Блок контента -->
-	<div class="content-text">
-{% block content %}
-{% endblock %}
-{% if page_obj.has_other_pages %}
-<nav class="list-pages">
-    <ul>
-{% if page_obj.has_previous %}
-<li class="page-num">
-	<a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
-</li>
-{% endif %}
-
-        {% for p in paginator.page_range %}
-		{% if page_obj.number == p %}
-        <li class="page-num page-num-selected">{{ p }}</li>
-		{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2  %}
-        <li class="page-num">
-            <a href="?page={{ p }}">{{ p }}</a>
-        </li>
-		{% endif %}
-        {% endfor %}
-
-{% if page_obj.has_next %}
-<li class="page-num">
-	<a href="?page={{ page_obj.next_page_number }}">&gt;</a>
-</li>
-{% endif %}
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
     </ul>
+  </div>
 </nav>
-{% endif %}
-	</div>
+
+  <div class="row justify-content-md">
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Cras justo odio
+    <span class="badge badge-primary badge-pill">14</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Dapibus ac facilisis in
+    <span class="badge badge-primary badge-pill">2</span>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    Morbi leo risus
+    <span class="badge badge-primary badge-pill">1</span>
+  </li>
+</ul>
+  </div>
+
 <!-- Конец блока контента -->
 
-</td></tr></table>
-</td></tr>
-</table>
+
+
+
+
+</div>
+
 </body>
 </html>
